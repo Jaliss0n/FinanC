@@ -1,11 +1,24 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Divider, IconButton, TextInput } from "react-native-paper";
 import { useState } from "react";
 import { ButtonGradiant } from "../../../components/ButtonGradiant";
 import ContainerBlanck from "../../../components/ContainerBlank";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
   const [text, setText] = useState("");
+  const navigation = useNavigation();
+
+  function openScreen() {
+    navigation.navigate("Dashboard");
+  }
 
   return (
     <ContainerBlanck>
@@ -33,7 +46,7 @@ export default function Login() {
           />
         </View>
 
-        <ButtonGradiant title="Log in" />
+        <ButtonGradiant title="Log in" action={openScreen} />
 
         <View style={styles.containerIcons}>
           <IconButton icon="google" mode="contained" />
@@ -41,9 +54,11 @@ export default function Login() {
         </View>
 
         <Divider bold style={{ width: "40%" }} />
-        <Text style={styles.textSub}>
-          Não possui uma conta?, clique aqui para criar uma!
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <Text style={styles.textSub}>
+            Não possui uma conta?, clique aqui para criar uma!
+          </Text>
+        </TouchableOpacity>
       </View>
     </ContainerBlanck>
   );

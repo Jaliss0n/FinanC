@@ -3,9 +3,12 @@ import ContainerBlanck from "../../../components/ContainerBlank";
 import { Divider, IconButton, TextInput } from "react-native-paper";
 import { useState } from "react";
 import { ButtonGradiant } from "../../../components/ButtonGradiant";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Register() {
   const [text, setText] = useState<string>("");
+  const navigation = useNavigation();
 
   return (
     <ContainerBlanck>
@@ -50,10 +53,12 @@ export default function Register() {
           <IconButton icon="facebook" mode="contained" />
         </View>
         <Divider bold style={{ width: "40%" }} />
-        <Text style={styles.textSub}>
-          Não possui uma conta?, clique{" "}
-          <Text style={styles.textBold}>aqui</Text> para criar uma!
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.textSub}>
+            Já possui uma conta?, clique{" "}
+            <Text style={styles.textBold}>aqui</Text> para fazer login!
+          </Text>
+        </TouchableOpacity>
       </View>
     </ContainerBlanck>
   );

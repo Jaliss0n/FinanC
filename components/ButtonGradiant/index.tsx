@@ -1,12 +1,12 @@
 import { Button } from "react-native-paper";
-import {StyleProp, ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface ButtonProps {
   title: string;
+  action?:() => void;
 }
 
-export const ButtonGradiant = ({ title}: ButtonProps) => {
+export const ButtonGradiant = ({ title, action}: ButtonProps) => {
   return (
     <LinearGradient
       colors={["#7A15E4", "#97148C"]}
@@ -18,8 +18,8 @@ export const ButtonGradiant = ({ title}: ButtonProps) => {
     >
       <Button
         mode="contained"
-        onPress={() => console.log("Pressed")}
         uppercase={false}
+        onPress={action}
         style={{
             backgroundColor: '#dedede0',
         }}

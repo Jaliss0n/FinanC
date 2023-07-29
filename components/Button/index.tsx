@@ -1,18 +1,26 @@
 import { Button } from "react-native-paper";
-import {StyleProp, ViewStyle } from "react-native";
+import { GestureResponderEvent, StyleProp, ViewStyle } from "react-native";
 
 interface ButtonProps {
   title: string;
   icon: string;
   style?: StyleProp<ViewStyle>;
+  onPress?: ((e: GestureResponderEvent) => void)
 }
 
-export const ButtonWhite = ({ title,icon,style}: ButtonProps) => {
+export const ButtonWhite = ({
+  title,
+  icon,
+  style,
+  onPress,
+}: ButtonProps) => {
+  
+
   return (
     <Button
       icon={icon}
       mode="contained-tonal"
-      onPress={() => console.log("Pressed")}
+      onPress={onPress}
       uppercase
       style={style}
     >
