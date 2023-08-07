@@ -1,16 +1,36 @@
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useState } from "react";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Divider, IconButton, TextInput } from "react-native-paper";
-import { useState } from "react";
+import styled from "styled-components/native"; // Importando styled-components corretamente
 import { ButtonGradiant } from "../../../components/ButtonGradiant";
 import ContainerBlanck from "../../../components/ContainerBlank";
 import { useNavigation } from "@react-navigation/native";
+
+const Container = styled(View)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  height: 78%;
+`;
+
+const LogoImage = styled(Image)`
+  width: 50%;
+  height: 100px;
+`;
+
+const TextSub = styled(Text)`
+  color: #6C6666;
+  font-family: "Roboto-Regular";
+  text-align: center;
+  width: 160px;
+`;
+
+const IconsContainer = styled(View)`
+  display: flex;
+  flex-direction: row;
+`;
 
 export default function Login() {
   const [text, setText] = useState("");
@@ -22,14 +42,13 @@ export default function Login() {
 
   return (
     <ContainerBlanck>
-      <View style={styles.container}>
-        <Image
+      <Container>
+        <LogoImage
           source={require("../../../assets/images/Logo.png")}
-          style={styles.logo}
         />
-        <Text style={styles.textSub}>
+        <TextSub>
           Digite as credenciais para continuar.
-        </Text>
+        </TextSub>
         <View style={{ width: "80%" }}>
           <TextInput
             mode="outlined"
@@ -48,48 +67,18 @@ export default function Login() {
 
         <ButtonGradiant title="Log in" action={openScreen} />
 
-        <View style={styles.containerIcons}>
+        <IconsContainer>
           <IconButton icon="google" mode="contained" />
           <IconButton icon="facebook" mode="contained" />
-        </View>
+        </IconsContainer>
 
         <Divider bold style={{ width: "40%" }} />
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={styles.textSub}>
+          <TextSub>
             Não possui uma conta?, clique aqui para criar uma!
-          </Text>
+          </TextSub>
         </TouchableOpacity>
-      </View>
+      </Container>
     </ContainerBlanck>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    height: "78%",
-  },
-  wavesImg: {
-    width: "100%",
-    height: 100,
-    marginTop: "10%",
-  },
-  logo: {
-    width: "50%",
-    height: 100,
-  },
-  textSub: {
-    color: "#6C6666",
-    fontFamily: "Roboto-Regular",
-    textAlign: "center",
-    width: 160,
-  },
-  containerIcons: {
-    display: "flex",
-    flexDirection: "row",
-  },
-});

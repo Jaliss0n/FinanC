@@ -1,8 +1,20 @@
 import * as Font from "expo-font";
-import { PaperProvider } from "react-native-paper";
 import { Routes } from "./routes";
 import { useCallback, useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import { MD3LightTheme, PaperProvider } from "react-native-paper";
+import { ThemeContextProvider } from "./ThemeContext";
+
+// const theme = {
+//   ...MD3LightTheme, // or MD3DarkTheme
+//   roundness: 2,
+//   colors: {
+//     ...MD3LightTheme.colors,
+//     primary: '#6d1f9b',
+//     secondary: '#97148C',
+//     tertiary: '#ffffff',
+//   },
+// };
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -45,8 +57,11 @@ export default function App() {
   }
 
   return (
-    <PaperProvider>
+    <ThemeContextProvider>
       <Routes />
-    </PaperProvider>
+    </ThemeContextProvider>
+
+    // <PaperProvider theme={theme}>
+    // </PaperProvider>
   );
 }

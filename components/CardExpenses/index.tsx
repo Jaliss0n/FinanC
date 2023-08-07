@@ -1,4 +1,7 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Image, Text, View } from "react-native";
+import styled from "styled-components/native"; // Importando styled-components corretamente
+import { useTheme } from "../../ThemeContext";
 
 interface CardExpensesProps {
   title: string;
@@ -6,52 +9,55 @@ interface CardExpensesProps {
 }
 
 export default function CardExpenses({ title, budget }: CardExpensesProps) {
+
+  const {theme} = useTheme()
+  
+  const CardContainer = styled(View)`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${theme.colors.accent};  
+    border-radius: 18px;
+    padding-vertical: 10px;
+    margin-right: 10px;
+    elevation: 10;
+    shadow-color: black;
+    shadow-offset: 0px 2px;
+    shadow-opacity: 0.8;
+    margin-bottom: 15px;
+  `;
+  
+  const ContainerGroup = styled(View)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 15px;
+  `;
+  
+  const IconImage = styled(Image)`
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+  `;
+  
+  const TextBudget = styled(Text)`
+    color: #fff;
+    font-family: "Roboto-Bold";
+    font-weight: 800;
+    font-size: 25px;
+    margin-right: 15px;
+  `;
+
   return (
-    <View style={styles.container}>
-      <View style={styles.containerGroup}>
-        <Image
+    <CardContainer>
+      <ContainerGroup>
+        <IconImage
           source={require("../../assets/images/circulo-usd.png")}
-          style={styles.iconIMG}
         />
-        <Text style={styles.textBudget}>{title}</Text>
-      </View>
-      <Text style={styles.textBudget}>R$ {budget}</Text>
-    </View>
+        <TextBudget>{title}</TextBudget>
+      </ContainerGroup>
+      <TextBudget>R$ {budget}</TextBudget>
+    </CardContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#7A15E4",
-    borderRadius: 18,
-    paddingVertical: 10,
-    marginRight: 10,
-    elevation: 10,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    marginBottom: 15
-  },
-  containerGroup: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 15
-  },
-  iconIMG: {
-    width: 40,
-    height: 40,
-    marginRight: 15,
-  },
-  textBudget: {
-    color: "#fff",
-    fontFamily: "Roboto-Bold",
-    fontWeight: "800",
-    fontSize: 25,
-    marginRight: 15
-  },
-});

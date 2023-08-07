@@ -1,55 +1,58 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Image, Text, View } from "react-native";
+import styled from "styled-components/native"; // Importando styled-components corretamente
+import { useTheme } from "../../ThemeContext";
 
 interface BudgetProps {
-    title: string;
-    budget: number;
+  title: string;
+  budget: number;
 }
 
-export default function CardBudget({title, budget}: BudgetProps) {
-    return (
-        <View>
-            <Text style={styles.title}>{title}</Text>
-            <View style={styles.container}>
-                <Image source={require('../../assets/images/circulo-usd.png')}
-                    style={{width: 40, height: 40,}}
-                />
-                <Text style={styles.textBudget}>R$ {budget}</Text>
-            </View>
-        </View>
-    )
+export default function CardBudget({ title, budget }: BudgetProps) {
+  const {theme} = useTheme();
+
+  const CardContainer = styled(View)`
+    margin: 5px 0;
+    margin-right: 20px;
+    margin-left: 10px;
+    elevation: 10;
+    shadow-color: black;
+    shadow-offset: 0px 2px;
+    shadow-opacity: 0.8;
+    border-radius: 18px;
+    padding-vertical: 10px;
+    width: 200px;
+    background-color: ${theme.colors.accent};
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  `;
+
+  const CardTextBudget = styled(Text)`
+    color: #fff;
+    font-family: "Roboto-Bold";
+    font-weight: 800;
+    font-size: 25px;
+  `;
+
+  const CardTitle = styled(Text)`
+    font-family: "Roboto-Regular";
+    color: #e9e9e9;
+    margin-bottom: 8px;
+    margin-left: 10px;
+  `;
+
+  return (
+    <View>
+      <CardTitle>{title}</CardTitle>
+      <CardContainer>
+        <Image
+          source={require("../../assets/images/circulo-usd.png")}
+          style={{ width: 40, height: 40 }}
+        />
+        <CardTextBudget>R$ {budget}</CardTextBudget>
+      </CardContainer>
+    </View>
+  );
 }
-
-const styles = StyleSheet.create({
-    title:{
-        fontFamily: 'Roboto-Regular',
-        color: "#e9e9e9",
-        marginBottom: 8
-    },
-    container: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#7A15E4',
-        borderRadius: 18,
-        // paddingVertical: "3%",
-        paddingVertical: 10,
-        // width: '60%',
-        width: 200,
-        marginRight:20,
-        marginLeft:2,
-        elevation: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        marginVertical: 5
-        
-
-    },
-    textBudget: {
-        color: '#fff',
-        fontFamily: 'Roboto-Bold',
-        fontWeight: '800',
-        fontSize: 25
-    }
-  });

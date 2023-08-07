@@ -1,83 +1,72 @@
-import { StatusBar } from "expo-status-bar";
-import { Image, StyleSheet, Text } from "react-native";
+import React from "react";
+import { StatusBar, Image, Text } from "react-native";
 import { ButtonWhite } from "../../../components/Button";
 import { ContainerGradient } from "../../../components/ContainerGradient";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
+import styled from "styled-components/native"; // Importando styled-components corretamente
 
-// type StackParamList = {
-//   Welcome: undefined;
-//   Login: undefined;
-// };
+const TitleText = styled(Text)`
+  font-size: 50px;
+  color: #fff;
+  font-family: "Roboto-Bold";
+  position: absolute;
+  width: 60%;
+  top: 25%;
+  left: 4%;
+`;
 
-// type StackProps = NativeStackScreenProps<StackParamList, "Welcome">;
-// type Props = {
-//   routes: StackProps;
-//   navigation: any
-// };
+const PorquinhoImage = styled(Image)`
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 1%;
+  left: 30%;
+`;
+
+const SacoDinheiroImage = styled(Image)`
+  width: 280px;
+  height: 280px;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+`;
+
+const NextButton = styled(Button)`
+  position: absolute;
+  bottom: 5%;
+  width: 90%;
+  align-self: center;
+`;
+
 export default function Welcome() {
   const navigation = useNavigation();
-  
+
   function openScreen() {
     navigation.navigate('Login')
   }
 
   return (
     <ContainerGradient>
-      <StatusBar style="auto" />
-      <Image
+      <StatusBar barStyle='default' />
+      <PorquinhoImage
         source={require("../../../assets/images/Porquinho.png")}
-        style={styles.porquinho}
       />
-      <Text style={styles.titleText}>
+      <TitleText>
         Vem organizar suas finanças com a gente!
-      </Text>
-      <Image
+      </TitleText>
+      <SacoDinheiroImage
         source={require("../../../assets/images/SacoDinheiro.png")}
-        style={styles.sacoDinheiro}
       />
 
-      <Button
+      <NextButton
         icon="arrow-right-drop-circle"
         mode="contained-tonal"
         onPress={openScreen}
         uppercase
-        style={styles.buttonNext}
       >
-        Vamos la!!
-      </Button>
+        Vamos lá!!
+      </NextButton>
     </ContainerGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  titleText: {
-    fontSize: 50,
-    color: "#fff",
-    fontFamily: "Roboto-Bold",
-    position: "absolute",
-    width: "60%",
-    top: "25%",
-    left: "4%",
-  },
-  porquinho: {
-    width: 300,
-    height: 300,
-    position: "absolute",
-    top: "1%",
-    left: "30%",
-  },
-  sacoDinheiro: {
-    width: 280,
-    height: 280,
-    position: "absolute",
-    top: "50%",
-    left: "40%",
-  },
-  buttonNext: {
-    position: "absolute",
-    bottom: "5%",
-    width: "90%",
-    alignSelf: "center",
-  },
-});

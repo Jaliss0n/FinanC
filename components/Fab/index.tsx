@@ -1,6 +1,8 @@
 import * as React from "react";
 import { FAB, Portal } from "react-native-paper";
-import ModalCount from "../Modal";
+import ModalLayout from "../ModalLayoult";
+import ModalCount from "../ModalCount";
+import ModalWage from "../ModalWage";
 
 export default function FabButton() {
   const [state, setState] = React.useState({ open: false });
@@ -12,6 +14,11 @@ export default function FabButton() {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
+  //Estado do Modal Adicionar Renda
+  const [visibleIncome, setVisibleIncome] = React.useState(false);
+  const showModalIncome = () => setVisibleIncome(true);
+  const hideModalIncome = () => setVisibleIncome(false);
+  
   return (
     <Portal>
       <FAB.Group
@@ -27,7 +34,7 @@ export default function FabButton() {
           {
             icon: "cash-plus",
             label: "Salario",
-            onPress: () => console.log("Pressed email"),
+            onPress: () => showModalIncome(),
           },
           
         ]}
@@ -38,7 +45,13 @@ export default function FabButton() {
           }
         }}
       />
-      <ModalCount hideModal={hideModal} visible={visible} showModal={showModal}/>
+      <ModalLayout title="Contas" hideModal={hideModal} visible={visible} showModal={showModal}>
+        <ModalCount/>
+      </ModalLayout>
+
+      <ModalLayout title="Renda" hideModal={hideModalIncome} visible={visibleIncome} showModal={showModalIncome}>
+        <ModalWage/>
+      </ModalLayout>
     </Portal>
   );
 }
